@@ -1,6 +1,8 @@
 package edu.brown.cs.student.client;
 
 import java.io.IOException;
+import java.net.Authenticator;
+import java.net.ProxySelector;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -17,7 +19,13 @@ public class ApiClient {
   public ApiClient() {
     // TODO build an HttpClient with version HTTP_2 and connection timeout of 60 seconds.
     // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html
-    this.client = null;
+    HttpClient client = HttpClient.newBuilder()
+        .version(HttpClient.Version.HTTP_2)
+        .followRedirects(HttpClient.Redirect.NORMAL)
+        .connectTimeout(Duration.ofSeconds(60))
+        .authenticator(Authenticator.getDefault())
+        .build();
+    this.client = client;
   }
 
   public void makeRequest(HttpRequest req) {
