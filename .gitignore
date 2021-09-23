@@ -1,0 +1,11 @@
+# standard CS32 gitignore
+target/
+.mvn-classpath
+.classpath
+.idea/
+**.DS_Store**
+/bin/
+*.class
+# ignore the security config files. we NEVER want these to be committed - always be careful with this kind of thing.
+# if you accidentally commit keys to a repo, immediately go invalidate those keys.
+config/secret/*
