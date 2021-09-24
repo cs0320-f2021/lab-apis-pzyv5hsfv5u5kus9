@@ -42,7 +42,7 @@ public class ClientRequestGenerator {
 
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create(reqUri))
-        .header("x-api-key",apiKey)
+        .header("key",apiKey)
         .build();
 
     // Hint: .header("x-api-key", apiKey)
