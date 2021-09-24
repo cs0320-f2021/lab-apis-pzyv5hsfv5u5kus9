@@ -40,13 +40,11 @@ public class ClientRequestGenerator {
     String apiKey = clientAuth.getApiKey();
     // TODO build and return a new GET HttpRequest with an api key header.
 
-    HttpRequest request = HttpRequest.newBuilder()
+    // Hint: .header("x-api-key", apiKey)
+    return HttpRequest.newBuilder()
         .uri(URI.create(reqUri))
         .header("x-api-key",apiKey)
         .build();
-
-    // Hint: .header("x-api-key", apiKey)
-    return request;
   }
 
   /**
@@ -57,10 +55,16 @@ public class ClientRequestGenerator {
    */
   public static HttpRequest getSecuredPostRequest(String param) {
     String reqUri = "https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/securedResource";
-    String apiKey = null;
+    String apiKey;
     // TODO build and return a new POST HttpRequest with an api key header, and the param in the body.
+    ClientAuth clientAuth = new ClientAuth();
+    apiKey = clientAuth.getApiKey();
+    return HttpRequest.newBuilder()
+        .uri(URI.create(reqUri))
+        .POST(HttpRequest.BodyPublishers.ofString("{\"name\":\"" + param + "\"}"))
+        .header("x-api-key",apiKey)
+        .build();
     // Hint: the POST param should be: HttpRequest.BodyPublishers.ofString("{\"name\":\"" + param + "\"}")
-    return null;
   }
 
   /**
