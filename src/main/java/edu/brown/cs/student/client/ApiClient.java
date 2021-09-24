@@ -3,6 +3,7 @@ package edu.brown.cs.student.client;
 import java.io.IOException;
 import java.net.Authenticator;
 import java.net.ProxySelector;
+import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -26,6 +27,20 @@ public class ApiClient {
         .proxy(ProxySelector.getDefault())
         .authenticator(Authenticator.getDefault())
         .build();
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create("https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/introResource"))
+        .timeout(Duration.ofSeconds(60))
+        .header("Content-Type", "application/json")
+        .GET()
+        .build();
+    try {
+      HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      System.out.println(response.statusCode());
+      System.out.println(response.body());
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.out.println("ERROR: part 2 connection error");
+    }
     this.client = client;
   }
 
