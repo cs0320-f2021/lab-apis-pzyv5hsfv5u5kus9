@@ -21,16 +21,17 @@ public class ClientRequestGenerator {
   public static HttpRequest getIntroGetRequest() {
     // The resource we want is hosted at https://cq2gahtw4j.execute-api.us-east-1.amazonaws.com/.
     String reqUri = "https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/introResource";
-    HttpClient client = HttpClient.newHttpClient();
-    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(reqUri)).build();
-    client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenApply(HttpResponse::body)
-        .thenAccept(System.out::println).join();
+
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(reqUri))
+        .build();
+
 
     // TODO build and return a new GET HttpRequest.
 
     // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpRequest.html and
     // https://docs.oracle.com/en/java/javase/1/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html
-    return null;
+    return request;
   }
 
   /**

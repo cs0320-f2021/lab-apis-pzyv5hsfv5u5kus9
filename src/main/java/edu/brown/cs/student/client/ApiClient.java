@@ -20,28 +20,11 @@ public class ApiClient {
   public ApiClient() {
     // TODO build an HttpClient with version HTTP_2 and connection timeout of 60 seconds.
     // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html
-    HttpClient client = HttpClient.newBuilder()
+    this.client = HttpClient.newBuilder()
         .version(HttpClient.Version.HTTP_2)
-        .followRedirects(HttpClient.Redirect.NORMAL)
         .connectTimeout(Duration.ofSeconds(60))
-        .proxy(ProxySelector.getDefault())
-        .authenticator(Authenticator.getDefault())
         .build();
-    HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/introResource"))
-        .timeout(Duration.ofSeconds(60))
-        .header("Content-Type", "application/json")
-        .GET()
-        .build();
-    try {
-      HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(response.statusCode());
-      System.out.println(response.body());
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("ERROR: part 2 connection error");
-    }
-    this.client = client;
+
   }
 
   public void makeRequest(HttpRequest req) {
