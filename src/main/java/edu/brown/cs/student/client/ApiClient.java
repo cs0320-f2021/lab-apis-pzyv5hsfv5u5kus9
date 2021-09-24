@@ -23,6 +23,7 @@ public class ApiClient {
         .version(HttpClient.Version.HTTP_2)
         .followRedirects(HttpClient.Redirect.NORMAL)
         .connectTimeout(Duration.ofSeconds(60))
+        .proxy(ProxySelector.getDefault())
         .authenticator(Authenticator.getDefault())
         .build();
     this.client = client;
