@@ -54,15 +54,15 @@ public class ClientRequestGenerator {
    * @return an HttpRequest object for accessing and posting to the secured resource.
    */
   public static HttpRequest getSecuredPostRequest(String param) {
-    String reqUri = "https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/securedResource";
+    String reqUri = "https://runwayapi.herokuapp.com/integration";
     String apiKey;
     // TODO build and return a new POST HttpRequest with an api key header, and the param in the body.
     ClientAuth clientAuth = new ClientAuth();
     apiKey = clientAuth.getApiKey();
     return HttpRequest.newBuilder()
         .uri(URI.create(reqUri))
-        .POST(HttpRequest.BodyPublishers.ofString("{\"name\":\"" + param + "\"}"))
-        .header("x-api-key",apiKey)
+        .POST(HttpRequest.BodyPublishers.ofString("{\"auth\": \"m\"}"))
+        .header("x-api-key","Jid9mm6")
         .build();
     // Hint: the POST param should be: HttpRequest.BodyPublishers.ofString("{\"name\":\"" + param + "\"}")
   }
